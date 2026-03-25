@@ -1,6 +1,6 @@
 package com.payflow.dto.request;
 
-import com.payflow.entity.Account;
+import com.payflow.entity.Account.AccountType;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

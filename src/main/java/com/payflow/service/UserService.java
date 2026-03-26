@@ -10,6 +10,7 @@ import com.payflow.mapper.UserMapper;
 import com.payflow.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,10 +19,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserResponse registerUser(RegisterUserRequest request){
-        if (userRepository.existsByEmail(request.getEmail())){
+    @Transactional
+    public UserResponse registerUser(RegisterUserRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
             throw new DuplicateResourceException(
-                    "User already exists with email : " + request.getEmail()
+                    "User already exists with email: " + request.getEmail()
             );
         }
 
@@ -35,17 +37,25 @@ public class UserService {
         return userMapper.toResponse(savedUser);
     }
 
-    public UserResponse updateUser(Long id , UpdateUserRequest request){
+    public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "User not found with id : " + id
+                        "User not found with id: " + id
+                ));
+        return userMapper.toResponse(user);
+    }
+
+    @Transactional
+    public UserResponse updateUser(Long id, UpdateUserRequest request) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "User not found with id: " + id
                 ));
 
         user.setFullName(request.getFullName());
         user.setPhone(request.getPhone());
 
-        User updateUser = userRepository.save(user);
-        return userMapper.toResponse(updateUser);
+        User updatedUser = userRepository.save(user);
+        return userMapper.toResponse(updatedUser);
     }
-
 }

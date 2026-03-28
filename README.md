@@ -158,3 +158,24 @@ Service layer is unit tested with JUnit 5 and Mockito. Repositories are mocked s
 Priyank Sharma — Java Backend Developer, Bengaluru
 
 [LinkedIn](https://linkedin.com/in/priyank-sharma408/) · [GitHub](https://github.com/PRIYANK097)
+
+
+## Build Status
+
+### Phase 1 — Core REST API ✅ Complete
+- [x] Spring Boot project setup with PostgreSQL
+- [x] Entity design — User, Account, Transaction
+- [x] Repository layer with Spring Data JPA
+- [x] DTO pattern — request and response objects
+- [x] MapStruct compile-time entity to DTO mapping
+- [x] Custom exceptions with global exception handler
+- [x] Bean Validation on all incoming requests
+- [x] Service layer with full business logic
+- [x] REST Controllers — User, Account, Transaction
+- [x] Swagger / OpenAPI 3.0 documentation
+- [x] End-to-end tested via Postman
+
+### Phase 2 — Coming Next
+- [ ] Spring Security + JWT authentication
+- [ ] Role-based access control (USER / ADMIN)
+- [ ] Password hashing with BCrypt
